@@ -4,10 +4,7 @@ from functools import partial
 import wheel as w
 import slice as s
 
-def validateLogin(username, password):
-	print("username entered :", username.get())
-	print("password entered :", password.get())
-	return
+
 
 LARGE_FONT= ("Verdana", 12)
 
@@ -57,17 +54,30 @@ class StartPage(tk.Frame):
         button2.pack()
 
 
+class Register(tk.Frame):
+
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        label = tk.Label(self, text="Register page!", font=LARGE_FONT)
+        label.pack(pady=10,padx=100)
+
+        # buttons for navigating between windows
+        button1 = tk.Button(self, text="Back to Home",
+                            command=lambda: controller.show_frame(StartPage))
+        button1.pack(side=LEFT)
+
+        button2 = tk.Button(self, text="Log In",
+                            command=lambda: controller.show_frame(LogIn))
+        button2.pack(side=LEFT)
+
+
+
 class LogIn(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         label = tk.Label(self, text="Log In Page!", font=LARGE_FONT)
         label.pack(pady=10,padx=100)
-
-        # bind keyboard input to this frame
-        # self.bind('<Key>', lambda a : self.key_press(a))
-        self.focus_set()
-        self.bind("<Key>", self.key_press)
 
         #username label and text entry box
         username_label = tk.Label(self, text="User Name: ")
@@ -85,7 +95,7 @@ class LogIn(tk.Frame):
         password_entry = tk.Entry(self, textvariable=password, show='*')
         password_entry.pack()  
 
-        validate = partial(validateLogin, username, password)
+        validate = partial(self.validateLogin, username, password)
 
         # create canvas
         canvas = tk.Canvas(self, width=300, height=300)
@@ -94,8 +104,13 @@ class LogIn(tk.Frame):
         wheel = w.Wheel()
         wheel.create(canvas)
 
+        # bind keyboard input to this frame
+        self.focus_set()
+        self.bind("<Key>", lambda event: self.keyPress(event, wheel, canvas))
 
-        # #login button
+
+        #login button
+        # need to bind this with a function that validates credentials
         submit_button = tk.Button(self, text="Login", command=validate)
         submit_button.pack()
 
@@ -109,28 +124,33 @@ class LogIn(tk.Frame):
         button2.pack(side=LEFT, pady=20)
 
     # function to process keyboard input
-    def key_press(self, event):
+    def keyPress(self, event, wheel, canvas):
         key = event.char 
-        print(key, 'is pressed')
+        # print(key, 'is pressed')
+
+        # # if key pressed is w (up), user chooses outer letter
+        # if key == "w":
+            
+        # # if key pressed is s (down), user chooses inner letter
+        # if key == "s":
+
+        # if key pressed is a (left), user chooses to rotate wheel left
+        if key == "a":
+            direction = -1
+            wheel.updateColorsSlices(canvas, direction)
+
+        # if key pressed is d (right), user chooses to rotate wheel right
+        if key == "d":
+            direction = 1
+            wheel.updateColorsSlices(canvas, direction)
+
+    # function to validate login
+    def validateLogin(self, username, password):
+        print("username entered :", username.get())
+        print("password entered :", password.get())
+        return
   
 
-
-
-class Register(tk.Frame):
-
-    def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
-        label = tk.Label(self, text="Register page!", font=LARGE_FONT)
-        label.pack(pady=10,padx=100)
-
-        # buttons for navigating between windows
-        button1 = tk.Button(self, text="Back to Home",
-                            command=lambda: controller.show_frame(StartPage))
-        button1.pack(side=LEFT)
-
-        button2 = tk.Button(self, text="Log In",
-                            command=lambda: controller.show_frame(LogIn))
-        button2.pack(side=LEFT)
 
         
 

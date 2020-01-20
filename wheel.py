@@ -1,4 +1,5 @@
 import random
+from collections import OrderedDict 
 import slice as s
 
 COORDINATES = (30, 30, 250, 250)
@@ -12,8 +13,8 @@ class Wheel:
         self.slices = []
         self.characters = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"
                           , "a", "b", "c", "d", "e", "f", "g", "h", "i", "j"]
-        # dictionary to keep track of which color is at which slice
-        self.pairings = {}
+        # ordered dictionary to keep track of which color is at which slice
+        self.pairings = OrderedDict()
         # could possibly change number of slices
         # used to calculate the extent to draw the arcs
         self.number_of_slices = 10
@@ -32,8 +33,6 @@ class Wheel:
     def create(self, canvas):
         # make copy of colors and characters list
         # for randomly choosing and removing (don't want to modify original)
-        print(self.colors)
-        print(self.characters)
         colors_copy = self.colors.copy()
         chars_copy = self.characters.copy()
 
@@ -58,9 +57,9 @@ class Wheel:
             self.pairings[rand_color] = self.slices[i]
 
             # testing
-            print("slice " + str(i))
-            print(self.slices[i].getChars())
-            print(rand_color)
+            # print("slice " + str(i))
+            # print(self.slices[i].getChars())
+            # print(rand_color)
 
             # set start for next slice
             start += extent
@@ -68,8 +67,33 @@ class Wheel:
         return
 
     # function to change pairings of colors and slices when user rotates wheel
-    # also need to redraw!!
-    def updateColorsSlices(self, canvas):
+    # also redraws the wheel to seem like it is rotating
+    def updateColorsSlices(self, canvas, direction):
+        # get self.pairings keys list and values list
+        colors = list(self.pairings.keys())
+        slices = list(self.pairings.values())
+
+        # rotate colors array
+        if direction == 1:
+            # right rotate
+            rotated = colors[1:] + [colors[0]]
+            
+        if direction == -1:
+            # left rotate
+            rotated = colors[-1:] + colors[:-1]
+
+        # reset pairings of colors and slices
+        self.pairings = OrderedDict(zip(rotated, slices))
+
+        # redraw rotated wheel on screen
+        # calculate the "extent" for drawing arc
+        extent = 360 / self.number_of_slices
+        start = 0
+        for color, slice in self.pairings.items():
+            slice.setStartingPosition(start)
+            slice.draw(canvas, color, extent)
+            start += extent 
+
         return
 
 
