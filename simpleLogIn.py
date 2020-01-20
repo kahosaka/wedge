@@ -1,39 +1,13 @@
 from tkinter import *
 import tkinter as tk
 from functools import partial
+import wheel as w
+import slice as s
 
 def validateLogin(username, password):
 	print("username entered :", username.get())
 	print("password entered :", password.get())
 	return
-
-def main():
-
-    #window
-    tkWindow = Tk()  
-    tkWindow.geometry('400x150')  
-    tkWindow.title('Tkinter Login Form')
-
-    #username label and text entry box
-    Label(tkWindow, text="User Name").grid(row=0, column=0)
-    username = StringVar()
-    Entry(tkWindow, textvariable=username).grid(row=0, column=1)  
-
-    #password label and password entry box
-    Label(tkWindow,text="Password").grid(row=1, column=0)  
-    password = StringVar()
-    Entry(tkWindow, textvariable=password, show='*').grid(row=1, column=1)  
-
-    validate = partial(validateLogin, username, password)
-
-    #login button
-    Button(tkWindow, text="Login", command=validate).grid(row=4, column=0)  
-
-    tkWindow.mainloop()
-
-
-# main()
-
 
 LARGE_FONT= ("Verdana", 12)
 
@@ -108,13 +82,13 @@ class LogIn(tk.Frame):
 
         validate = partial(validateLogin, username, password)
 
-        # trying to make circle
+        # create the wheel
         canvas = tk.Canvas(self, width=300, height=300)
         canvas.pack(fill="both", expand=True)
-        canvas.create_arc(30, 30, 250, 250, start=0, extent=90, fill="red")
-        canvas.create_arc(30, 30, 250, 250, start=-90, extent=90, fill="blue")
-        canvas.create_arc(30, 30, 250, 250, start=-180, extent=90, fill="green")
-        canvas.create_arc(30, 30, 250, 250, start=-270, extent=90, fill="white")
+
+        wheel = w.Wheel()
+        wheel.create(canvas)
+
 
         # #login button
         submit_button = tk.Button(self, text="Login", command=validate)
@@ -149,6 +123,30 @@ class Register(tk.Frame):
 
         
 
+def main():
+    app = Main()
+    app.mainloop()
 
-app = Main()
-app.mainloop()
+main()
+
+
+
+
+
+
+# canvas.create_arc(30, 30, 250, 250, start=0, extent=90, outline="red", width=7.0)
+        # canvas.create_arc(30, 30, 250, 250, start=90, extent=90, outline="blue", width=7.0)
+        # canvas.create_arc(30, 30, 250, 250, start=180, extent=90, outline="green", width=7.0)
+        # canvas.create_arc(30, 30, 250, 250, start=270, extent=90, outline="black", width=7.0)
+
+        # canvas.create_arc(30, 30, 250, 250, start=0, extent=36, fill="red2")
+        # canvas.create_arc(30, 30, 250, 250, start=36, extent=36, fill="blue")
+        # canvas.create_arc(30, 30, 250, 250, start=72, extent=36, fill="forest green")
+        # canvas.create_arc(30, 30, 250, 250, start=108, extent=36, fill="white")
+        # canvas.create_arc(30, 30, 250, 250, start=144, extent=36, fill="purple1")
+        # canvas.create_arc(30, 30, 250, 250, start=180, extent=36, fill="dark turquoise")
+        # canvas.create_arc(30, 30, 250, 250, start=216, extent=36, fill="DarkOrange1")
+        # canvas.create_arc(30, 30, 250, 250, start=252, extent=36, fill="saddle brown")
+        # canvas.create_arc(30, 30, 250, 250, start=288, extent=36, fill="yellow")
+        # canvas.create_arc(30, 30, 250, 250, start=324, extent=36, fill="gray")
+        # canvas.create_text(200, 100, text="a")
