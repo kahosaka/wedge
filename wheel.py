@@ -96,6 +96,12 @@ class Wheel:
 
         return
 
+    
+    # function to retrieve a character from a slice given a color and index
+    def getCharacter(self, color, index):
+        slice = self.pairings[color]
+        return slice.getCharacter(index)
+
 
 
     

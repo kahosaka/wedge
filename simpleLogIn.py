@@ -7,6 +7,8 @@ import slice as s
 
 
 LARGE_FONT= ("Verdana", 12)
+COLORS = ["red2", "DarkOrange1", "blue", "forest green", "purple1", "white", "saddle brown"
+        , "dark turquoise", "yellow", "dim gray"]
 
 class Main(tk.Tk):
 
@@ -61,6 +63,41 @@ class Register(tk.Frame):
         label = tk.Label(self, text="Register page!", font=LARGE_FONT)
         label.pack(pady=10,padx=100)
 
+        # save user chosen color
+        self.color = None
+
+        #username label and text entry box
+        username_label = tk.Label(self, text="User Name: ")
+        username_label.grid(row=0, column=0)
+        username_label.pack()
+        username = tk.StringVar()
+        username_entry = tk.Entry(self, textvariable=username) 
+        username_entry.pack()
+
+        #password label and password entry box
+        password_label = tk.Label(self,text="Password: ")
+        password_label.grid(row=1, column=0)
+        password_label.pack()  
+        password = tk.StringVar()
+        password_entry = tk.Entry(self, textvariable=password)
+        password_entry.pack() 
+
+        # create drop down menu 
+        color_label = tk.Label(self,text="Choose Color: ")
+        color_label.grid(row=1, column=0)
+        color_label.pack() 
+        color = tk.StringVar()
+        color.set("red2")
+        drop_down = tk.OptionMenu(self, color, *COLORS, command=self.getColor)
+        drop_down.pack()
+        
+
+        # button to submit user info
+        # will trigger a function that saves everything to file
+        # in the format: username password color
+        submit_button = tk.Button(self, text="Submit", command=lambda: self.saveInfo(username.get(), password.get()))
+        submit_button.pack()
+
         # buttons for navigating between windows
         button1 = tk.Button(self, text="Back to Home",
                             command=lambda: controller.show_frame(StartPage))
@@ -70,6 +107,18 @@ class Register(tk.Frame):
                             command=lambda: controller.show_frame(LogIn))
         button2.pack(side=LEFT)
 
+    # function to get chosen color from drop down menu
+    def getColor(self, value):
+        self.color = value
+
+
+    # function to save created user info into a file for future log in validation
+    def saveInfo(self, username, password):
+        with open("credentials.txt", "a") as f:
+            f.write(username + ' ')
+            f.write(password + ' ')
+            f.write(self.color + '\n')
+        f.close()
 
 
 class LogIn(tk.Frame):
@@ -79,6 +128,13 @@ class LogIn(tk.Frame):
         label = tk.Label(self, text="Log In Page!", font=LARGE_FONT)
         label.pack(pady=10,padx=100)
 
+        # keep track of current user's color
+        self.color = None
+
+        # create log in window components
+        self.createWindow(controller)
+    
+    def createWindow(self, controller):
         #username label and text entry box
         username_label = tk.Label(self, text="User Name: ")
         username_label.grid(row=0, column=0)
@@ -108,7 +164,6 @@ class LogIn(tk.Frame):
         self.focus_set()
         self.bind("<Key>", lambda event: self.keyPress(event, wheel, canvas))
 
-
         #login button
         # need to bind this with a function that validates credentials
         submit_button = tk.Button(self, text="Login", command=validate)
@@ -128,11 +183,13 @@ class LogIn(tk.Frame):
         key = event.char 
         # print(key, 'is pressed')
 
-        # # if key pressed is w (up), user chooses outer letter
-        # if key == "w":
+        # if key pressed is w (up), user chooses outer letter
+        if key == "w":
+            index = 1
             
-        # # if key pressed is s (down), user chooses inner letter
-        # if key == "s":
+        # if key pressed is s (down), user chooses inner letter
+        if key == "s":
+            index = 0
 
         # if key pressed is a (left), user chooses to rotate wheel left
         if key == "a":

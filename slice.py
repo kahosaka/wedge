@@ -24,7 +24,7 @@ class Slice:
         self.characters = char
     
     # function to return an inner or outer character based on user input
-    def getCharacters(self, number):
+    def getCharacter(self, number):
         return self.characters[number]
     
     # function to display the characters on the screen inside the slice
