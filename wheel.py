@@ -1,5 +1,3 @@
-import tkinter as tk
-from tkinter import *
 import random
 import slice as s
 
@@ -69,6 +67,10 @@ class Wheel:
             
         return
 
+    # function to change pairings of colors and slices when user rotates wheel
+    # also need to redraw!!
+    def updateColorsSlices(self, canvas):
+        return
 
 
 

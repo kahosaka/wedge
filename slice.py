@@ -1,5 +1,3 @@
-import tkinter as tk
-from tkinter import *
 
 COORDINATES = (30, 30, 250, 250)
 
@@ -27,7 +25,7 @@ class Slice:
     
     # function to return an inner or outer character based on user input
     def getCharacters(self, number):
-        return
+        return self.characters[number]
     
     # function to display the characters on the screen inside the slice
     def drawCharacters(self, canvas):

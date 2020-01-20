@@ -64,6 +64,11 @@ class LogIn(tk.Frame):
         label = tk.Label(self, text="Log In Page!", font=LARGE_FONT)
         label.pack(pady=10,padx=100)
 
+        # bind keyboard input to this frame
+        # self.bind('<Key>', lambda a : self.key_press(a))
+        self.focus_set()
+        self.bind("<Key>", self.key_press)
+
         #username label and text entry box
         username_label = tk.Label(self, text="User Name: ")
         username_label.grid(row=0, column=0)
@@ -82,10 +87,10 @@ class LogIn(tk.Frame):
 
         validate = partial(validateLogin, username, password)
 
-        # create the wheel
+        # create canvas
         canvas = tk.Canvas(self, width=300, height=300)
         canvas.pack(fill="both", expand=True)
-
+        # create wheel
         wheel = w.Wheel()
         wheel.create(canvas)
 
@@ -102,6 +107,12 @@ class LogIn(tk.Frame):
         button2 = tk.Button(self, text="Register",
                             command=lambda: controller.show_frame(Register))
         button2.pack(side=LEFT, pady=20)
+
+    # function to process keyboard input
+    def key_press(self, event):
+        key = event.char 
+        print(key, 'is pressed')
+  
 
 
 
