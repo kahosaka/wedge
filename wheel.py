@@ -106,6 +106,7 @@ class Wheel:
     
     # function that returns the slice that has the given color
     def getSlice(self, color):
+        # print(self.pairings)
         return self.pairings[color]
 
 

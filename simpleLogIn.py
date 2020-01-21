@@ -11,6 +11,7 @@ LARGE_FONT= ("Verdana", 12)
 COLORS = ["red2", "DarkOrange1", "blue", "forest green", "purple1", "white", "saddle brown"
         , "dark turquoise", "yellow", "dim gray"]
 DISPLAY_PASSWORD_COORDS = [100, 20]
+USERNAME_ENTERED = False
 
 class Main(tk.Tk):
 
@@ -255,9 +256,13 @@ class LogIn(tk.Frame):
                             temp = x[2:]
                             self.user_color = " ".join(temp)
                             self.user_color = self.user_color[:-1]
+                        else:
+                            self.user_color = x[2]
+                            self.user_color = self.user_color[:-1]
             # print(self.user_password)
             # print(self.user_color)
             self.focus()
+            USERNAME_ENTERED = True
         except Exception as e:
             print(e)
         finally:    
