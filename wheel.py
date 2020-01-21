@@ -51,8 +51,9 @@ class Wheel:
 
             # assign to slice and draw slice
             self.slices[i].setCharacters([rand_char1, rand_char2])
-            self.slices[i].setStartingPosition(start)
+            self.slices[i].setStartingAngle(start)
             self.slices[i].draw(canvas, rand_color, extent)
+            self.slices[i].drawCharacters(canvas)
             # add pairing to dictionary (color: Slice)
             self.pairings[rand_color] = self.slices[i]
 
@@ -90,7 +91,7 @@ class Wheel:
         extent = 360 / self.number_of_slices
         start = 0
         for color, slice in self.pairings.items():
-            slice.setStartingPosition(start)
+            slice.setStartingAngle(start)
             slice.draw(canvas, color, extent)
             start += extent 
 

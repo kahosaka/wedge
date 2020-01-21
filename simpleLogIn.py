@@ -69,7 +69,7 @@ class Register(tk.Frame):
 
         #username label and text entry box
         username_label = tk.Label(self, text="User Name: ")
-        username_label.grid(row=0, column=0)
+        # username_label.grid(row=0, column=0)
         username_label.pack()
         username = tk.StringVar()
         username_entry = tk.Entry(self, textvariable=username) 
@@ -77,7 +77,7 @@ class Register(tk.Frame):
 
         #password label and password entry box
         password_label = tk.Label(self,text="Password: ")
-        password_label.grid(row=1, column=0)
+        # password_label.grid(row=1, column=0)
         password_label.pack()  
         password = tk.StringVar()
         password_entry = tk.Entry(self, textvariable=password)
@@ -85,7 +85,7 @@ class Register(tk.Frame):
 
         # create drop down menu 
         color_label = tk.Label(self,text="Choose Color: ")
-        color_label.grid(row=1, column=0)
+        # color_label.grid(row=1, column=0)
         color_label.pack() 
         color = tk.StringVar()
         color.set("red2")
@@ -154,7 +154,7 @@ class LogIn(tk.Frame):
     def createWindow(self, controller):
         #username label and text entry box
         username_label = tk.Label(self, text="User Name: ")
-        username_label.grid(row=0, column=0)
+        # username_label.grid(row=0, column=0)
         username_label.pack()
         username = tk.StringVar()
         username_entry = tk.Entry(self, textvariable=username) 
@@ -164,7 +164,7 @@ class LogIn(tk.Frame):
 
         #password label and password entry box
         password_label = tk.Label(self,text="Password: ")
-        password_label.grid(row=1, column=0)
+        # password_label.grid(row=1, column=0)
         password_label.pack()  
         password = tk.StringVar()
         password_entry = tk.Entry(self, textvariable=password, show='*')
@@ -244,7 +244,13 @@ class LogIn(tk.Frame):
     # function to validate login using previously saved user_password to compare against
     # what the user has entered via the wheel
     def validateLogin(self, password):
-        return self.user_password == password
+        if self.user_password == password:
+            # log in successful!
+            messagebox.showinfo("Success", "Log In Success!")
+        else:
+            # password not correct
+            # reset wheel? reset already entered password
+            messagebox.showinfo("Fail", "Password Incorrect. Please try again")
   
 
 

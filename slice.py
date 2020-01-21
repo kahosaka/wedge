@@ -7,16 +7,17 @@ class Slice:
         # characters is list where index 0 represents the inner letter and 
         # index 1 represents the outer letter
         self.characters = []
-        self.start_position = None
+        self.start_angle = None
+        self.position = None
     
     # function to actually draw the slice on the screen
     def draw(self, canvas, color, extent):
-        canvas.create_arc(COORDINATES, start=self.start_position, extent=extent, fill=color)
+        canvas.create_arc(COORDINATES, start=self.start_angle, extent=extent, fill=color)
         return
 
-    # function that sets a slice's starting position (for draw)
-    def setStartingPosition(self, start):
-        self.start_position = start
+    # function that sets a slice's starting angle (for draw)
+    def setStartingAngle(self, start):
+        self.start_angle = start
         return
 
     # function to set the characters inside this slice
@@ -29,6 +30,7 @@ class Slice:
     
     # function to display the characters on the screen inside the slice
     def drawCharacters(self, canvas):
+        canvas.create_text(COORDINATES[0], COORDINATES[1], text=self.characters[0])
         return
 
     # function to retrieve characters list
