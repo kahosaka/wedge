@@ -10,6 +10,7 @@ import slice as s
 LARGE_FONT= ("Verdana", 12)
 COLORS = ["red2", "DarkOrange1", "blue", "forest green", "purple1", "white", "saddle brown"
         , "dark turquoise", "yellow", "dim gray"]
+DISPLAY_PASSWORD_COORDS = [100, 20]
 
 class Main(tk.Tk):
 
@@ -147,6 +148,7 @@ class LogIn(tk.Frame):
         # keep track of current user's color and password
         self.user_color = None
         self.user_password = None
+        self.current_password = ""
 
         # create log in window components
         self.createWindow(controller)
@@ -166,9 +168,12 @@ class LogIn(tk.Frame):
         password_label = tk.Label(self,text="Password: ")
         # password_label.grid(row=1, column=0)
         password_label.pack()  
-        password = tk.StringVar()
-        password_entry = tk.Entry(self, textvariable=password, show='*')
-        password_entry.pack()  
+        # password = tk.StringVar()
+        # password_entry = tk.Entry(self, textvariable=password, show='*')
+        # password_entry.pack()  
+
+        password_canvas = tk.Canvas(self, width=300, height=30)
+        password_canvas.pack()
 
         # create canvas
         canvas = tk.Canvas(self, width=300, height=300)
@@ -179,11 +184,11 @@ class LogIn(tk.Frame):
 
         # bind keyboard input to this frame
         self.focus_set()
-        self.bind("<Key>", lambda event: self.keyPress(event, wheel, canvas))
+        self.bind("<Key>", lambda event: self.keyPress(event, wheel, canvas, password_canvas))
 
         #login button
         # need to bind this with a function that validates credentials
-        validate = partial(self.validateLogin, password.get())
+        validate = partial(self.validateLogin, password_canvas)
         submit_button = tk.Button(self, text="Login", command=validate)
         submit_button.pack()
 
@@ -197,17 +202,33 @@ class LogIn(tk.Frame):
         button2.pack(side=LEFT, pady=20)
 
     # function to process keyboard input
-    def keyPress(self, event, wheel, canvas):
+    def keyPress(self, event, wheel, canvas, password_canvas):
         key = event.char 
         # print(key, 'is pressed')
 
         # if key pressed is w (up), user chooses outer letter
         if key == "w":
             index = 1
-            
+            # need to show a * on the screen, find the slice that is chosen,
+            # get chosen char from slice, 
+            # add char to current password
+            slice = wheel.getSlice(self.user_color)
+            char = slice.getCharacter((index))
+            self.current_password += char
+            password_canvas.create_text(DISPLAY_PASSWORD_COORDS[0], DISPLAY_PASSWORD_COORDS[1], text=char)
+            DISPLAY_PASSWORD_COORDS[0] += 10
+
         # if key pressed is s (down), user chooses inner letter
         if key == "s":
             index = 0
+            # need to show a * on the screen, find the slice that is chosen,
+            # get chosen char from slice, 
+            # add char to current password
+            slice = wheel.getSlice(self.user_color)
+            char = slice.getCharacter((index))
+            self.current_password += char
+            password_canvas.create_text(DISPLAY_PASSWORD_COORDS[0], DISPLAY_PASSWORD_COORDS[1], text=char)
+            DISPLAY_PASSWORD_COORDS[0] += 10
 
         # if key pressed is a (left), user chooses to rotate wheel left
         if key == "a":
@@ -233,8 +254,10 @@ class LogIn(tk.Frame):
                         if len(x) > 3:
                             temp = x[2:]
                             self.user_color = " ".join(temp)
+                            self.user_color = self.user_color[:-1]
             # print(self.user_password)
             # print(self.user_color)
+            self.focus()
         except Exception as e:
             print(e)
         finally:    
@@ -243,14 +266,17 @@ class LogIn(tk.Frame):
 
     # function to validate login using previously saved user_password to compare against
     # what the user has entered via the wheel
-    def validateLogin(self, password):
-        if self.user_password == password:
+    def validateLogin(self, password_canvas):
+        print(self.user_password)
+        print(self.current_password)
+        if self.user_password == self.current_password:
             # log in successful!
             messagebox.showinfo("Success", "Log In Success!")
         else:
             # password not correct
             # reset wheel? reset already entered password
             messagebox.showinfo("Fail", "Password Incorrect. Please try again")
+            password_canvas.delete("all")
   
 
 
