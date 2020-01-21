@@ -1,6 +1,7 @@
 import random
-from collections import OrderedDict 
+from collections import OrderedDict
 import slice as s
+import time
 
 COORDINATES = (30, 30, 250, 250)
 
@@ -18,17 +19,17 @@ class Wheel:
         # could possibly change number of slices
         # used to calculate the extent to draw the arcs
         self.number_of_slices = 10
-        
+
         # populate slices list
         self.makeSlices()
-    
+
     # function to create Slice instances for self.slices
     def makeSlices(self):
         for i in range(self.number_of_slices):
             slice = s.Slice()
             self.slices.append(slice)
 
-    # function that creates the wheel by looping through slices, 
+    # function that creates the wheel by looping through slices,
     # assigning colors and characters, and calling their draw function
     def create(self, canvas):
         # make copy of colors and characters list
@@ -52,10 +53,14 @@ class Wheel:
             # assign to slice and draw slice
             self.slices[i].setCharacters([rand_char1, rand_char2])
             self.slices[i].setStartingAngle(start)
-            self.slices[i].draw(canvas, rand_color, extent)
+            #self.slices[i].draw(canvas, rand_color, extent)
             self.slices[i].drawCharacters(canvas)
+
             # add pairing to dictionary (color: Slice)
             self.pairings[rand_color] = self.slices[i]
+
+
+            #s.SLICE_COORD += 10
 
             # testing
             # print("slice " + str(i))
@@ -64,7 +69,8 @@ class Wheel:
 
             # set start for next slice
             start += extent
-            
+            s.SLICE_NUM += 1
+
         return
 
     # function to change pairings of colors and slices when user rotates wheel
@@ -78,7 +84,7 @@ class Wheel:
         if direction == 1:
             # right rotate
             rotated = colors[1:] + [colors[0]]
-            
+
         if direction == -1:
             # left rotate
             rotated = colors[-1:] + colors[:-1]
@@ -93,16 +99,12 @@ class Wheel:
         for color, slice in self.pairings.items():
             slice.setStartingAngle(start)
             slice.draw(canvas, color, extent)
-            start += extent 
+            start += extent
 
         return
 
-    
+
     # function to retrieve a character from a slice given a color and index
     def getCharacter(self, color, index):
         slice = self.pairings[color]
         return slice.getCharacter(index)
-
-
-
-    
