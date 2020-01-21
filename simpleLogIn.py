@@ -16,7 +16,7 @@ USERNAME_ENTERED = False
 class Main(tk.Tk):
 
     def __init__(self, *args, **kwargs):
-        
+
         tk.Tk.__init__(self, *args, **kwargs)
         container = tk.Frame(self)
 
@@ -42,7 +42,7 @@ class Main(tk.Tk):
         frame = self.frames[cont]
         frame.tkraise()
 
-        
+
 class StartPage(tk.Frame):
 
     def __init__(self, parent, controller):
@@ -74,26 +74,26 @@ class Register(tk.Frame):
         # username_label.grid(row=0, column=0)
         username_label.pack()
         username = tk.StringVar()
-        username_entry = tk.Entry(self, textvariable=username) 
+        username_entry = tk.Entry(self, textvariable=username)
         username_entry.pack()
 
         #password label and password entry box
         password_label = tk.Label(self,text="Password: ")
         # password_label.grid(row=1, column=0)
-        password_label.pack()  
+        password_label.pack()
         password = tk.StringVar()
         password_entry = tk.Entry(self, textvariable=password)
-        password_entry.pack() 
+        password_entry.pack()
 
-        # create drop down menu 
+        # create drop down menu
         color_label = tk.Label(self,text="Choose Color: ")
         # color_label.grid(row=1, column=0)
-        color_label.pack() 
+        color_label.pack()
         color = tk.StringVar()
         color.set("red2")
         drop_down = tk.OptionMenu(self, color, *COLORS, command=self.getColor)
         drop_down.pack()
-        
+
 
         # button to submit user info
         # will trigger a function that saves everything to file
@@ -153,14 +153,14 @@ class LogIn(tk.Frame):
 
         # create log in window components
         self.createWindow(controller)
-    
+
     def createWindow(self, controller):
         #username label and text entry box
         username_label = tk.Label(self, text="User Name: ")
         # username_label.grid(row=0, column=0)
         username_label.pack()
         username = tk.StringVar()
-        username_entry = tk.Entry(self, textvariable=username) 
+        username_entry = tk.Entry(self, textvariable=username)
         # user has to press enter/return key after typing in their username
         username_entry.bind("<Return>", lambda event: self.checkUsername(username.get()))
         username_entry.pack()
@@ -168,10 +168,15 @@ class LogIn(tk.Frame):
         #password label and password entry box
         password_label = tk.Label(self,text="Password: ")
         # password_label.grid(row=1, column=0)
-        password_label.pack()  
+
+        password_label.pack()
+        password = tk.StringVar()
+        password_entry = tk.Entry(self, textvariable=password, show='*')
+        password_entry.pack()
+        password_label.pack()
         # password = tk.StringVar()
         # password_entry = tk.Entry(self, textvariable=password, show='*')
-        # password_entry.pack()  
+        # password_entry.pack()
 
         password_canvas = tk.Canvas(self, width=300, height=30)
         password_canvas.pack()
@@ -203,15 +208,19 @@ class LogIn(tk.Frame):
         button2.pack(side=LEFT, pady=20)
 
     # function to process keyboard input
+    def keyPress(self, event, wheel, canvas):
+        key = event.char
+
     def keyPress(self, event, wheel, canvas, password_canvas):
-        key = event.char 
+        key = event.char
         # print(key, 'is pressed')
 
         # if key pressed is w (up), user chooses outer letter
         if key == "w":
             index = 1
+
             # need to show a * on the screen, find the slice that is chosen,
-            # get chosen char from slice, 
+            # get chosen char from slice,
             # add char to current password
             slice = wheel.getSlice(self.user_color)
             char = slice.getCharacter((index))
@@ -223,7 +232,7 @@ class LogIn(tk.Frame):
         if key == "s":
             index = 0
             # need to show a * on the screen, find the slice that is chosen,
-            # get chosen char from slice, 
+            # get chosen char from slice,
             # add char to current password
             slice = wheel.getSlice(self.user_color)
             char = slice.getCharacter((index))
@@ -265,7 +274,7 @@ class LogIn(tk.Frame):
             USERNAME_ENTERED = True
         except Exception as e:
             print(e)
-        finally:    
+        finally:
             f.close()
         return
 
@@ -282,10 +291,11 @@ class LogIn(tk.Frame):
             # reset wheel? reset already entered password
             messagebox.showinfo("Fail", "Password Incorrect. Please try again")
             password_canvas.delete("all")
-  
 
 
-        
+
+
+
 
 def main():
     app = Main()
