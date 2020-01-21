@@ -168,11 +168,6 @@ class LogIn(tk.Frame):
         #password label and password entry box
         password_label = tk.Label(self,text="Password: ")
         # password_label.grid(row=1, column=0)
-
-        password_label.pack()
-        password = tk.StringVar()
-        password_entry = tk.Entry(self, textvariable=password, show='*')
-        password_entry.pack()
         password_label.pack()
         # password = tk.StringVar()
         # password_entry = tk.Entry(self, textvariable=password, show='*')
