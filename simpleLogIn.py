@@ -167,20 +167,18 @@ class LogIn(tk.Frame):
         #password label and password entry box
         password_label = tk.Label(self,text="Password: ")
         # password_label.grid(row=1, column=0)
-<<<<<<< HEAD
+
         password_label.pack()
         password = tk.StringVar()
         password_entry = tk.Entry(self, textvariable=password, show='*')
         password_entry.pack()
-=======
-        password_label.pack()  
+        password_label.pack()
         # password = tk.StringVar()
         # password_entry = tk.Entry(self, textvariable=password, show='*')
-        # password_entry.pack()  
+        # password_entry.pack()
 
         password_canvas = tk.Canvas(self, width=300, height=30)
         password_canvas.pack()
->>>>>>> 828540cdf823ddb0d0fca9939b121dc7d588a8b4
 
         # create canvas
         canvas = tk.Canvas(self, width=300, height=300)
@@ -209,35 +207,31 @@ class LogIn(tk.Frame):
         button2.pack(side=LEFT, pady=20)
 
     # function to process keyboard input
-<<<<<<< HEAD
     def keyPress(self, event, wheel, canvas):
         key = event.char
-=======
+
     def keyPress(self, event, wheel, canvas, password_canvas):
-        key = event.char 
->>>>>>> 828540cdf823ddb0d0fca9939b121dc7d588a8b4
+        key = event.char
         # print(key, 'is pressed')
 
         # if key pressed is w (up), user chooses outer letter
         if key == "w":
             index = 1
-<<<<<<< HEAD
-=======
+
             # need to show a * on the screen, find the slice that is chosen,
-            # get chosen char from slice, 
+            # get chosen char from slice,
             # add char to current password
             slice = wheel.getSlice(self.user_color)
             char = slice.getCharacter((index))
             self.current_password += char
             password_canvas.create_text(DISPLAY_PASSWORD_COORDS[0], DISPLAY_PASSWORD_COORDS[1], text=char)
             DISPLAY_PASSWORD_COORDS[0] += 10
->>>>>>> 828540cdf823ddb0d0fca9939b121dc7d588a8b4
 
         # if key pressed is s (down), user chooses inner letter
         if key == "s":
             index = 0
             # need to show a * on the screen, find the slice that is chosen,
-            # get chosen char from slice, 
+            # get chosen char from slice,
             # add char to current password
             slice = wheel.getSlice(self.user_color)
             char = slice.getCharacter((index))
@@ -291,11 +285,8 @@ class LogIn(tk.Frame):
             # password not correct
             # reset wheel? reset already entered password
             messagebox.showinfo("Fail", "Password Incorrect. Please try again")
-<<<<<<< HEAD
-=======
             password_canvas.delete("all")
-  
->>>>>>> 828540cdf823ddb0d0fca9939b121dc7d588a8b4
+
 
 
 
