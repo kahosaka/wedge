@@ -154,6 +154,7 @@ class LogIn(tk.Frame):
         # create log in window components
         self.createWindow(controller)
 
+    # function that creates all components of the log in page
     def createWindow(self, controller):
         #username label and text entry box
         username_label = tk.Label(self, text="User Name: ")
@@ -202,7 +203,7 @@ class LogIn(tk.Frame):
                             command=lambda: controller.show_frame(Register))
         button2.pack(side=LEFT, pady=20)
 
-    
+    # function that handles keyboard input
     def keyPress(self, event, wheel, canvas, password_canvas):
         key = event.char
         # print(key, 'is pressed')
