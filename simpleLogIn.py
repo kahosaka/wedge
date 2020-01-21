@@ -1,5 +1,6 @@
 from tkinter import *
 import tkinter as tk
+from tkinter import messagebox
 from functools import partial
 import wheel as w
 import slice as s
@@ -114,11 +115,26 @@ class Register(tk.Frame):
 
     # function to save created user info into a file for future log in validation
     def saveInfo(self, username, password):
-        with open("credentials.txt", "a") as f:
-            f.write(username + ' ')
-            f.write(password + ' ')
-            f.write(self.color + '\n')
-        f.close()
+        try:
+            # first check if username exists already
+            with open("credentials.txt", "r") as f:
+                for line in f:
+                    # line parsing
+                    x = line.split(' ')
+                    # check if username exists
+                    if x[0] == username:
+                        # prompt user to choose another username
+                        messagebox.showinfo("Retry", "Username already exists, please choose another one")
+                        f.close()
+                        return
+            with open("credentials.txt", "a") as f:
+                f.write(username + ' ')
+                f.write(password + ' ')
+                f.write(self.color + '\n')
+        except Exception as e:
+            print(e)
+        finally:
+            f.close()
 
 
 class LogIn(tk.Frame):
@@ -128,8 +144,9 @@ class LogIn(tk.Frame):
         label = tk.Label(self, text="Log In Page!", font=LARGE_FONT)
         label.pack(pady=10,padx=100)
 
-        # keep track of current user's color
-        self.color = None
+        # keep track of current user's color and password
+        self.user_color = None
+        self.user_password = None
 
         # create log in window components
         self.createWindow(controller)
@@ -141,6 +158,8 @@ class LogIn(tk.Frame):
         username_label.pack()
         username = tk.StringVar()
         username_entry = tk.Entry(self, textvariable=username) 
+        # user has to press enter/return key after typing in their username
+        username_entry.bind("<Return>", lambda event: self.checkUsername(username.get()))
         username_entry.pack()
 
         #password label and password entry box
@@ -150,8 +169,6 @@ class LogIn(tk.Frame):
         password = tk.StringVar()
         password_entry = tk.Entry(self, textvariable=password, show='*')
         password_entry.pack()  
-
-        validate = partial(self.validateLogin, username, password)
 
         # create canvas
         canvas = tk.Canvas(self, width=300, height=300)
@@ -166,6 +183,7 @@ class LogIn(tk.Frame):
 
         #login button
         # need to bind this with a function that validates credentials
+        validate = partial(self.validateLogin, password.get())
         submit_button = tk.Button(self, text="Login", command=validate)
         submit_button.pack()
 
@@ -201,11 +219,32 @@ class LogIn(tk.Frame):
             direction = 1
             wheel.updateColorsSlices(canvas, direction)
 
-    # function to validate login
-    def validateLogin(self, username, password):
-        print("username entered :", username.get())
-        print("password entered :", password.get())
+    # function to check entered username and retrieve this user's actual password and color
+    def checkUsername(self, username):
+        try:
+            with open("credentials.txt", "r") as f:
+                for line in f:
+                    # line parsing
+                    x = line.split(' ')
+                    # check if username matches
+                    if x[0] == username:
+                        # keep this user's password and color for comparison later
+                        self.user_password = x[1]
+                        if len(x) > 3:
+                            temp = x[2:]
+                            self.user_color = " ".join(temp)
+            # print(self.user_password)
+            # print(self.user_color)
+        except Exception as e:
+            print(e)
+        finally:    
+            f.close()
         return
+
+    # function to validate login using previously saved user_password to compare against
+    # what the user has entered via the wheel
+    def validateLogin(self, password):
+        return self.user_password == password
   
 
 
