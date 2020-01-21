@@ -58,7 +58,7 @@ class Wheel:
 
             # add pairing to dictionary (color: Slice)
             self.pairings[rand_color] = self.slices[i]
-
+            s.slice_num += 1
             # testing
             # print("slice " + str(i))
             # print(self.slices[i].getChars())
@@ -66,7 +66,7 @@ class Wheel:
 
             # set start for next slice
             start += extent
-            s.SLICE_NUM += 1
+            #s.SLICE_NUM += 1
 
         return
 
@@ -93,13 +93,21 @@ class Wheel:
         # calculate the "extent" for drawing arc
         extent = 360 / self.number_of_slices
         start = 0
+
+        s.slice_num = 0
         for color, slice in self.pairings.items():
             slice.setStartingAngle(start)
             slice.draw(canvas, color, extent)
+            slice.drawCharacters(canvas)
+            s.slice_num += 1
+
             start += extent
 
+        # for i in range(self.number_of_slices):
+        #     self.slices[i].drawCharacters(canvas)
 
         return
+
 
 
     # function to retrieve a character from a slice given a color and index

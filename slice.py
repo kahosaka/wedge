@@ -1,6 +1,6 @@
 
 COORDINATES = (30, 30, 250, 250)
-SLICE_NUM = 0
+slice_num = 0
 SLICE_COORD = 0
 
 # a slice has 2 characters in list form and it's start position
@@ -11,6 +11,7 @@ class Slice:
         self.characters = []
         self.start_angle = None
         self.position = None
+        #self.slice_num = 0
 
 
     # function to actually draw the slice on the screen
@@ -35,19 +36,33 @@ class Slice:
     def drawCharacters(self, canvas):
         #if SLICE_NUM == 0:
         # Upper half
-        if SLICE_NUM == 5:
+        # INNER
+        if slice_num == 5:
             canvas.create_text(90, 125, text=self.characters[0])
-        elif SLICE_NUM == 6:
+        elif slice_num == 6:
             canvas.create_text(110, 100, text=self.characters[0])
-        elif SLICE_NUM == 7:
+        elif slice_num == 7:
             canvas.create_text(143, 90, text=self.characters[0])
-        elif SLICE_NUM == 8:
+        elif slice_num == 8:
             canvas.create_text(167, 100, text=self.characters[0])
-        elif SLICE_NUM == 9:
+        elif slice_num == 9:
             canvas.create_text(190, 125, text=self.characters[0])
-        # Lower half
-        else:
+        elif slice_num == 0:
             canvas.create_text(90, 140, text=self.characters[0])
+
+        # OUTER
+        if slice_num == 5:
+            canvas.create_text(70, 120, text=self.characters[1])
+        elif slice_num == 6:
+            canvas.create_text(95, 85, text=self.characters[1])
+        elif slice_num == 7:
+            canvas.create_text(143, 70, text=self.characters[1])
+        elif slice_num == 8:
+            canvas.create_text(178, 80, text=self.characters[1])
+        elif slice_num == 9:
+            canvas.create_text(210, 120, text=self.characters[1])
+        elif slice_num == 0:
+            canvas.create_text(110, 130, text=self.characters[1])
 
 
         # canvas.create_text(200, 100, text=self.characters[1])
