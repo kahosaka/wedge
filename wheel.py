@@ -108,3 +108,15 @@ class Wheel:
     def getCharacter(self, color, index):
         slice = self.pairings[color]
         return slice.getCharacter(index)
+<<<<<<< HEAD
+=======
+
+    
+    # function that returns the slice that has the given color
+    def getSlice(self, color):
+        return self.pairings[color]
+
+
+
+    
+>>>>>>> 828540cdf823ddb0d0fca9939b121dc7d588a8b4
