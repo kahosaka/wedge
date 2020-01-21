@@ -202,10 +202,7 @@ class LogIn(tk.Frame):
                             command=lambda: controller.show_frame(Register))
         button2.pack(side=LEFT, pady=20)
 
-    # function to process keyboard input
-    def keyPress(self, event, wheel, canvas):
-        key = event.char
-
+    
     def keyPress(self, event, wheel, canvas, password_canvas):
         key = event.char
         # print(key, 'is pressed')
