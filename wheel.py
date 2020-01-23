@@ -59,18 +59,14 @@ class Wheel:
             # add pairing to dictionary (color: Slice)
             self.pairings[rand_color] = self.slices[i]
             s.SLICE_NUM += 1
-            # testing
-            # print("slice " + str(i))
-            # print(self.slices[i].getChars())
-            # print(rand_color)
 
             # set start for next slice
             start += extent
             #s.SLICE_NUM += 1
 
         # debug
-        for color, slice in self.pairings.items():
-            print(color + " " + slice.getChars()[0] + " " + slice.getChars()[1] + '\n')
+        # for color, slice in self.pairings.items():
+        #     print(color + " " + slice.getChars()[0] + " " + slice.getChars()[1] + '\n')
 
         return
 
@@ -85,12 +81,10 @@ class Wheel:
         if direction == 1:
             # right rotate
             rotated = colors[1:] + [colors[0]]
-            # self.pairings = OrderedDict(zip(rotated, slices))
 
         if direction == -1:
             # left rotate
             rotated = colors[-1:] + colors[:-1]
-            # self.pairings = OrderedDict(zip(rotated, slices))
 
         # reset pairings of colors and slices
         self.pairings = OrderedDict(zip(rotated, slices))
