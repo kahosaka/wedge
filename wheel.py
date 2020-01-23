@@ -58,7 +58,7 @@ class Wheel:
 
             # add pairing to dictionary (color: Slice)
             self.pairings[rand_color] = self.slices[i]
-            s.slice_num += 1
+            s.SLICE_NUM += 1
             # testing
             # print("slice " + str(i))
             # print(self.slices[i].getChars())
@@ -100,19 +100,19 @@ class Wheel:
         extent = 360 / self.number_of_slices
         start = 0
 
-        s.slice_num = 0
+        s.SLICE_NUM = 0
         for color, slice in self.pairings.items():
             slice.setStartingAngle(start)
             slice.draw(canvas, color, extent)
             slice.drawCharacters(canvas)
-            s.slice_num += 1
+            s.SLICE_NUM += 1
 
             start += extent
 
             # debug
             # print(color + " " + slice.getChars()[0] + " " + slice.getChars()[1] + '\n')
 
-        
+
 
         return
 

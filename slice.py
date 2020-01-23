@@ -1,6 +1,6 @@
 
 COORDINATES = (30, 30, 250, 250)
-slice_num = 0
+SLICE_NUM = 0
 SLICE_COORD = 0
 
 # a slice has 2 characters in list form and it's start position
@@ -11,7 +11,7 @@ class Slice:
         self.characters = []
         self.start_angle = None
         self.position = None
-        #self.slice_num = 0
+        #self.SLICE_NUM = 0
 
 
     # function to actually draw the slice on the screen
@@ -34,38 +34,50 @@ class Slice:
 
     # function to display the characters on the screen inside the slice
     def drawCharacters(self, canvas):
-        #if SLICE_NUM == 0:
-        # Upper half
-        # INNER
-        if slice_num == 4:
-            canvas.create_text(90, 125, text=self.characters[0])
-        if slice_num == 3:
-            canvas.create_text(110, 100, text=self.characters[0])
-        elif slice_num == 2:
-            canvas.create_text(143, 90, text=self.characters[0])
-        elif slice_num == 1:
-            canvas.create_text(167, 100, text=self.characters[0])
-        elif slice_num == 0:
+        # INNER RING OF WHEEL
+        if SLICE_NUM == 0:
             canvas.create_text(190, 125, text=self.characters[0])
-        if slice_num == 5:
+        elif SLICE_NUM == 1:
+            canvas.create_text(167, 100, text=self.characters[0])
+        elif SLICE_NUM == 2:
+            canvas.create_text(142, 90, text=self.characters[0])
+        elif SLICE_NUM == 3:
+            canvas.create_text(110, 100, text=self.characters[0])
+        elif SLICE_NUM == 4:
+            canvas.create_text(90, 125, text=self.characters[0])
+        elif SLICE_NUM == 5:
             canvas.create_text(90, 155, text=self.characters[0])
+        elif SLICE_NUM == 6:
+            canvas.create_text(110, 180, text=self.characters[0])
+        elif SLICE_NUM == 7:
+            canvas.create_text(142, 190, text=self.characters[0])
+        elif SLICE_NUM == 8:
+            canvas.create_text(167, 180, text=self.characters[0])
+        elif SLICE_NUM == 9:
+            canvas.create_text(190, 155, text=self.characters[0])
 
-        # OUTER
-        if slice_num == 4:
-            canvas.create_text(70, 120, text=self.characters[1])
-        elif slice_num == 3:
-            canvas.create_text(95, 85, text=self.characters[1])
-        elif slice_num == 2:
-            canvas.create_text(143, 70, text=self.characters[1])
-        elif slice_num == 1:
-            canvas.create_text(178, 80, text=self.characters[1])
-        elif slice_num == 0:
+        # OUTER RING OF WHEEL
+        if SLICE_NUM == 0:
             canvas.create_text(210, 120, text=self.characters[1])
-        elif slice_num == 5:
+        elif SLICE_NUM == 1:
+            canvas.create_text(178, 80, text=self.characters[1])
+        elif SLICE_NUM == 2:
+            canvas.create_text(143, 70, text=self.characters[1])
+        elif SLICE_NUM == 3:
+            canvas.create_text(95, 85, text=self.characters[1])
+        elif SLICE_NUM == 4:
+            canvas.create_text(70, 120, text=self.characters[1])
+        elif SLICE_NUM == 5:
             canvas.create_text(70, 165, text=self.characters[1])
+        elif SLICE_NUM == 6:
+            canvas.create_text(100, 200, text=self.characters[1])
+        elif SLICE_NUM == 7:
+            canvas.create_text(142, 210, text=self.characters[1])
+        elif SLICE_NUM == 8:
+            canvas.create_text(180, 200, text=self.characters[1])
+        elif SLICE_NUM == 9:
+            canvas.create_text(210, 160, text=self.characters[1])
 
-
-        # canvas.create_text(200, 100, text=self.characters[1])
         return
 
     # function to retrieve characters list
