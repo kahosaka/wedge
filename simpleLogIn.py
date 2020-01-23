@@ -16,10 +16,8 @@ USERNAME_ENTERED = False
 class Main(tk.Tk):
 
     def __init__(self, *args, **kwargs):
-
         tk.Tk.__init__(self, *args, **kwargs)
         container = tk.Frame(self)
-
         container.pack(side="top", fill="both", expand = True)
 
         container.grid_rowconfigure(10, weight=1)
@@ -41,6 +39,7 @@ class Main(tk.Tk):
 
         frame = self.frames[cont]
         frame.tkraise()
+
 
 
 class StartPage(tk.Frame):
@@ -294,14 +293,11 @@ class LogIn(tk.Frame):
             # reset password
             self.current_password = ""
 
-
-
-
-
-
 def main():
     app = Main()
+    app.title("Wedge")
     app.mainloop()
+
 
 main()
 
