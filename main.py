@@ -11,7 +11,7 @@ LARGE_FONT= ("Verdana", 12)
 COLORS = ["red2", "DarkOrange1", "blue", "forest green", "purple1", "white", "saddle brown"
         , "dark turquoise", "yellow", "dim gray"]
 DISPLAY_PASSWORD_COORDS = [100, 20]
-USERNAME_ENTERED = False
+
 
 class Main(tk.Tk):
 
@@ -270,10 +270,8 @@ class LogIn(tk.Frame):
                         else:
                             self.user_color = x[2]
                             self.user_color = self.user_color[:-1]
-            # print(self.user_password)
-            # print(self.user_color)
+
             self.focus()
-            USERNAME_ENTERED = True
         except Exception as e:
             print(e)
         finally:
@@ -288,7 +286,6 @@ class LogIn(tk.Frame):
             messagebox.showinfo("Success", "Log In Success!")
         else:
             # password not correct
-            # reset wheel? reset already entered password
             messagebox.showinfo("Fail", "Password Incorrect. Please try again")
             password_canvas.delete("all")
             # reset password
@@ -296,33 +293,11 @@ class LogIn(tk.Frame):
 
 
 
-
-
-
 def main():
     app = Main()
     app.mainloop()
 
-main()
+if __name__ == "__main__":
+    main()
 
 
-
-
-
-
-# canvas.create_arc(30, 30, 250, 250, start=0, extent=90, outline="red", width=7.0)
-        # canvas.create_arc(30, 30, 250, 250, start=90, extent=90, outline="blue", width=7.0)
-        # canvas.create_arc(30, 30, 250, 250, start=180, extent=90, outline="green", width=7.0)
-        # canvas.create_arc(30, 30, 250, 250, start=270, extent=90, outline="black", width=7.0)
-
-        # canvas.create_arc(30, 30, 250, 250, start=0, extent=36, fill="red2")
-        # canvas.create_arc(30, 30, 250, 250, start=36, extent=36, fill="blue")
-        # canvas.create_arc(30, 30, 250, 250, start=72, extent=36, fill="forest green")
-        # canvas.create_arc(30, 30, 250, 250, start=108, extent=36, fill="white")
-        # canvas.create_arc(30, 30, 250, 250, start=144, extent=36, fill="purple1")
-        # canvas.create_arc(30, 30, 250, 250, start=180, extent=36, fill="dark turquoise")
-        # canvas.create_arc(30, 30, 250, 250, start=216, extent=36, fill="DarkOrange1")
-        # canvas.create_arc(30, 30, 250, 250, start=252, extent=36, fill="saddle brown")
-        # canvas.create_arc(30, 30, 250, 250, start=288, extent=36, fill="yellow")
-        # canvas.create_arc(30, 30, 250, 250, start=324, extent=36, fill="gray")
-        # canvas.create_text(200, 100, text="a")
