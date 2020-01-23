@@ -37,32 +37,32 @@ class Slice:
         #if SLICE_NUM == 0:
         # Upper half
         # INNER
-        if slice_num == 5:
+        if slice_num == 4:
             canvas.create_text(90, 125, text=self.characters[0])
-        elif slice_num == 6:
+        if slice_num == 3:
             canvas.create_text(110, 100, text=self.characters[0])
-        elif slice_num == 7:
+        elif slice_num == 2:
             canvas.create_text(143, 90, text=self.characters[0])
-        elif slice_num == 8:
+        elif slice_num == 1:
             canvas.create_text(167, 100, text=self.characters[0])
-        elif slice_num == 9:
-            canvas.create_text(190, 125, text=self.characters[0])
         elif slice_num == 0:
-            canvas.create_text(90, 140, text=self.characters[0])
+            canvas.create_text(190, 125, text=self.characters[0])
+        if slice_num == 5:
+            canvas.create_text(90, 155, text=self.characters[0])
 
         # OUTER
-        if slice_num == 5:
+        if slice_num == 4:
             canvas.create_text(70, 120, text=self.characters[1])
-        elif slice_num == 6:
+        elif slice_num == 3:
             canvas.create_text(95, 85, text=self.characters[1])
-        elif slice_num == 7:
+        elif slice_num == 2:
             canvas.create_text(143, 70, text=self.characters[1])
-        elif slice_num == 8:
+        elif slice_num == 1:
             canvas.create_text(178, 80, text=self.characters[1])
-        elif slice_num == 9:
-            canvas.create_text(210, 120, text=self.characters[1])
         elif slice_num == 0:
-            canvas.create_text(110, 130, text=self.characters[1])
+            canvas.create_text(210, 120, text=self.characters[1])
+        elif slice_num == 5:
+            canvas.create_text(70, 165, text=self.characters[1])
 
 
         # canvas.create_text(200, 100, text=self.characters[1])

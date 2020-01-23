@@ -68,6 +68,10 @@ class Wheel:
             start += extent
             #s.SLICE_NUM += 1
 
+        # debug
+        for color, slice in self.pairings.items():
+            print(color + " " + slice.getChars()[0] + " " + slice.getChars()[1] + '\n')
+
         return
 
     # function to change pairings of colors and slices when user rotates wheel
@@ -81,10 +85,12 @@ class Wheel:
         if direction == 1:
             # right rotate
             rotated = colors[1:] + [colors[0]]
+            # self.pairings = OrderedDict(zip(rotated, slices))
 
         if direction == -1:
             # left rotate
             rotated = colors[-1:] + colors[:-1]
+            # self.pairings = OrderedDict(zip(rotated, slices))
 
         # reset pairings of colors and slices
         self.pairings = OrderedDict(zip(rotated, slices))
@@ -103,8 +109,10 @@ class Wheel:
 
             start += extent
 
-        # for i in range(self.number_of_slices):
-        #     self.slices[i].drawCharacters(canvas)
+            # debug
+            # print(color + " " + slice.getChars()[0] + " " + slice.getChars()[1] + '\n')
+
+        
 
         return
 
