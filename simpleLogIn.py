@@ -78,12 +78,12 @@ class Register(tk.Frame):
         username_entry.pack()
 
         #password label and password entry box
-        label = tk.Label(self,text="(Please create your password using \n these characters: 0-9, a-j)")
-        label.config(font=("Helvetica", 11))
-        label.pack()
         password_label = tk.Label(self,text="Password: ")
         # password_label.grid(row=1, column=0)
         password_label.pack()
+        label = tk.Label(self,text="(Please create your password using \n these characters: 0-9, a-j)")
+        label.config(font=("Helvetica", 11))
+        label.pack()
         password = tk.StringVar()
         password_entry = tk.Entry(self, textvariable=password)
         password_entry.pack()
