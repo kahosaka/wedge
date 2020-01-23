@@ -47,7 +47,7 @@ class StartPage(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self,parent)
-        label = tk.Label(self, text="Start Page", font=LARGE_FONT)
+        label = tk.Label(self, text="Home", font=LARGE_FONT)
         label.pack(pady=10,padx=100)
 
         button = tk.Button(self, text="Log In",
@@ -78,6 +78,9 @@ class Register(tk.Frame):
         username_entry.pack()
 
         #password label and password entry box
+        label = tk.Label(self,text="(Please create your password using \n these characters: 0-9, a-j)")
+        label.config(font=("Helvetica", 11))
+        label.pack()
         password_label = tk.Label(self,text="Password: ")
         # password_label.grid(row=1, column=0)
         password_label.pack()
@@ -98,7 +101,7 @@ class Register(tk.Frame):
         # button to submit user info
         # will trigger a function that saves everything to file
         # in the format: username password color
-        submit_button = tk.Button(self, text="Submit", command=lambda: self.saveInfo(username.get(), password.get()))
+        submit_button = tk.Button(self, text="Submit", command=lambda: self.saveInfo(username.get(), password.get(), username_entry, password_entry))
         submit_button.pack()
 
         # buttons for navigating between windows
@@ -116,7 +119,7 @@ class Register(tk.Frame):
 
 
     # function to save created user info into a file for future log in validation
-    def saveInfo(self, username, password):
+    def saveInfo(self, username, password, user_entry, pass_entry):
         try:
             # first check if username exists already
             with open("credentials.txt", "r") as f:
@@ -127,8 +130,14 @@ class Register(tk.Frame):
                     if x[0] == username:
                         # prompt user to choose another username
                         messagebox.showinfo("Retry", "Username already exists, please choose another one")
+                        user_entry.delete(0, END)
+                        pass_entry.delete(0, END)
                         f.close()
                         return
+            f.close()
+            user_entry.delete(0, END)
+            pass_entry.delete(0, END)
+            messagebox.showinfo("Success", "Registration success!")
             with open("credentials.txt", "a") as f:
                 f.write(username + ' ')
                 f.write(password + ' ')
@@ -274,8 +283,6 @@ class LogIn(tk.Frame):
     # function to validate login using previously saved user_password to compare against
     # what the user has entered via the wheel
     def validateLogin(self, password_canvas):
-        print(self.user_password)
-        print(self.current_password)
         if self.user_password == self.current_password:
             # log in successful!
             messagebox.showinfo("Success", "Log In Success!")
@@ -284,6 +291,8 @@ class LogIn(tk.Frame):
             # reset wheel? reset already entered password
             messagebox.showinfo("Fail", "Password Incorrect. Please try again")
             password_canvas.delete("all")
+            # reset password
+            self.current_password = ""
 
 
 
