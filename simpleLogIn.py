@@ -227,7 +227,7 @@ class LogIn(tk.Frame):
             slice = wheel.getSlice(self.user_color)
             char = slice.getCharacter((index))
             self.current_password += char
-            password_canvas.create_text(DISPLAY_PASSWORD_COORDS[0], DISPLAY_PASSWORD_COORDS[1], text=char)
+            password_canvas.create_text(DISPLAY_PASSWORD_COORDS[0], DISPLAY_PASSWORD_COORDS[1], text="*")
             DISPLAY_PASSWORD_COORDS[0] += 10
 
         # if key pressed is s (down), user chooses inner letter
@@ -239,7 +239,7 @@ class LogIn(tk.Frame):
             slice = wheel.getSlice(self.user_color)
             char = slice.getCharacter((index))
             self.current_password += char
-            password_canvas.create_text(DISPLAY_PASSWORD_COORDS[0], DISPLAY_PASSWORD_COORDS[1], text=char)
+            password_canvas.create_text(DISPLAY_PASSWORD_COORDS[0], DISPLAY_PASSWORD_COORDS[1], text="*")
             DISPLAY_PASSWORD_COORDS[0] += 10
 
         # if key pressed is a (left), user chooses to rotate wheel left
