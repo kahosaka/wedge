@@ -295,6 +295,7 @@ class LogIn(tk.Frame):
 
 def main():
     app = Main()
+    app.title("Wedge")
     app.mainloop()
 
 if __name__ == "__main__":
