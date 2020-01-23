@@ -65,8 +65,8 @@ class Wheel:
             #s.SLICE_NUM += 1
 
         # debug
-        for color, slice in self.pairings.items():
-            print(color + " " + slice.getChars()[0] + " " + slice.getChars()[1] + '\n')
+        # for color, slice in self.pairings.items():
+        #     print(color + " " + slice.getChars()[0] + " " + slice.getChars()[1] + '\n')
 
         return
 
