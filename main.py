@@ -6,7 +6,6 @@ import wheel as w
 import slice as s
 
 
-
 LARGE_FONT= ("Verdana", 12)
 COLORS = ["red2", "DarkOrange1", "blue", "forest green", "purple1", "white", "saddle brown"
         , "dark turquoise", "yellow", "dim gray"]
@@ -47,7 +46,7 @@ class StartPage(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self,parent)
-        label = tk.Label(self, text="Home", font=LARGE_FONT)
+        label = tk.Label(self, text="Home\nWelcome to Wedge!", font=LARGE_FONT)
         label.pack(pady=10,padx=100)
 
         button = tk.Button(self, text="Log In",
@@ -57,7 +56,6 @@ class StartPage(tk.Frame):
         button2 = tk.Button(self, text="Register",
                             command=lambda: controller.show_frame(Register))
         button2.pack()
-
 
 class Register(tk.Frame):
 
@@ -152,7 +150,7 @@ class LogIn(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        label = tk.Label(self, text="Log In Page!", font=LARGE_FONT)
+        label = tk.Label(self, text="Log In Page!\n", font=LARGE_FONT)
         label.pack(pady=10,padx=100)
 
         # keep track of current user's color and password
@@ -300,5 +298,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-

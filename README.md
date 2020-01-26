@@ -4,7 +4,7 @@ While passwords are meant to be secure ways for people to gain authorization and
 # Authors
 Jeanie Chen and Kiana Hosaka
 
-# 
+# Commands
 ```
 $ python3 main.py
 ```
