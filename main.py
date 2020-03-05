@@ -4,8 +4,10 @@ from tkinter import messagebox
 from functools import partial
 import wheel as w
 import slice as s
+
 """
 Routing between pages idea from https://pythonprogramming.net/change-show-new-frame-tkinter/
+Project inspired by Nevon Projects https://nevonprojects.com/graphical-password-to-avoid-shoulder-surfing/
 """
 
 
