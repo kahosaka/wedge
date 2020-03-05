@@ -4,6 +4,9 @@ from tkinter import messagebox
 from functools import partial
 import wheel as w
 import slice as s
+"""
+Routing between pages idea from https://pythonprogramming.net/change-show-new-frame-tkinter/
+"""
 
 
 LARGE_FONT= ("Verdana", 12)
