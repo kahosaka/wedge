@@ -1,4 +1,4 @@
-# Wedge
+# Wedge (See Report and Poster for more info)
 While passwords are meant to be secure ways for people to gain authorization and access, there are many ways in which passwords get stolen. Some simple examples are video recording, a program that logs keystrokes to then decipher the password, or simply standing behind and watching the person type in their password. User authentication is one of the most important and fundamental components in computer security systems, therefore it is important to ensure that it is a well protected process. This software combines both graphical and textual passwords to ensure a secure and effective login process that is immune to shoulder surfing, keylogging, and video recordings.
 
 # Authors
